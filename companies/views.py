@@ -1,10 +1,11 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
+from rest_framework import permissions
 
-class HomeView(APIView):
-    permission_classes = (IsAuthenticated,)
+from companies.serializers import CompanySerializer
+from .models import Company
 
-    def get(self, request):
-        content = {'message': 'Home page'}
-        return Response(content)
+class CompanyViewSet(viewsets.ModelViewSet):
+    # api endpt allows companies to viewed || edited
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    permission_classes = [permissions.IsAuthenticated]
