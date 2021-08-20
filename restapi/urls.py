@@ -20,6 +20,7 @@ from companies import views
 
 router = routers.DefaultRouter()
 router.register(r'companies', views.CompanyViewSet)
+router.register(r'projects', views.CompanyViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
