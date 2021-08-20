@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from companies import views
+# from projects import views
+# from blogs import views
 
 router = routers.DefaultRouter()
 router.register(r'companies', views.CompanyViewSet)
-router.register(r'projects', views.CompanyViewSet)
+# router.register(r'projects', views.ProjectViewSet)
+# router.register(r'blogs', views.BlogViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
