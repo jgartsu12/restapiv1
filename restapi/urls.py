@@ -1,31 +1,31 @@
-"""restapi URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-from companies import views
-# from projects import views
-# from blogs import views
+# from rest_framework import routers
+from blogs.views import (BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView)
+from companies.views import (CompanyListView, CompanyDetailView, CompanyCreateView, CompanyUpdateView, CompanyDeleteView)
+from projects.views import (ProjectListView, ProjectDetailView, ProjectCreateView, ProjectUpdateView, ProjectDeleteView)
 
-router = routers.DefaultRouter()
-router.register(r'companies', views.CompanyViewSet)
-# router.register(r'projects', views.ProjectViewSet)
-# router.register(r'blogs', views.BlogViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # companies urls
+    path('company/', CompanyListView.as_view()),
+    path('company/create/', CompanyCreateView.as_view()),
+    path('company/<pk>', CompanyDetailView.as_view()),
+    path('company/<pk>/update/', CompanyUpdateView.as_view()),
+    path('company/<pk>/delete/', CompanyDeleteView.as_view()),
+    # blogs urls
+    path('blog/', BlogListView.as_view()),
+    path('blog/create/', BlogCreateView.as_view()),
+    path('blog/<pk>', BlogDetailView.as_view()),
+    path('blog/<pk>/update/', BlogUpdateView.as_view()),
+    path('blog/<pk>/delete/', BlogDeleteView.as_view()),
+    # projects urls
+    path('project/', ProjectListView.as_view()),
+    path('project/create/', ProjectCreateView.as_view()),
+    path('project/<pk>', ProjectDetailView.as_view()),
+    path('project/<pk>/update/', ProjectUpdateView.as_view()),
+    path('project/<pk>/delete/', ProjectDeleteView.as_view()),
 ]

@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Blog
+from blogs.models import Blog
 
-class BlogSerializer(serializers.HyperlinkedModelSerializer):
+class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = ['title', 'image', 'description', 'updated-on', 'content', 'created-on', 'status']
